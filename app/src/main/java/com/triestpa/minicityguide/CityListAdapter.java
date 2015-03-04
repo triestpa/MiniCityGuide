@@ -18,14 +18,12 @@ import java.util.List;
 /* ListAdapter to render the city list */
 public class CityListAdapter extends ArrayAdapter<City> {
     private Context mContext;
-    private List<City> mData;
     private int mWidth, mHeight;
 
     public CityListAdapter(Context a, int layoutId,
                              List<City> data) {
         super(a, layoutId, data);
         mContext = a;
-        mData = data;
 
         //Get Screen width and height
         WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);

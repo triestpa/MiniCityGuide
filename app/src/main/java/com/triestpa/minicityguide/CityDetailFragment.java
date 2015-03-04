@@ -52,7 +52,6 @@ public class CityDetailFragment extends Fragment {
             ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(mCity.getName());
         }
         catch (Exception e) {
-            //TODO This is a sloppy fix, should implement a better way to detect if the app is running on tablet
             Log.e(TAG, "Do not set action bar title in 2 pane layout");
         }
 

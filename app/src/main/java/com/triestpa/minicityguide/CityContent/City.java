@@ -7,6 +7,7 @@ public class City {
     private String picURL;
     private String description;
 
+    //The id is randomly assigned when the city is read into memory, and acts as the key in the hashmap
     private int id;
 
     public City(String name, String country, String picURL, String description) {

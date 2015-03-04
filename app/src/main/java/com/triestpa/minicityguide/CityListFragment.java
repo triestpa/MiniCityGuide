@@ -13,7 +13,7 @@ import com.triestpa.minicityguide.CityContent.CityContentManager;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-//ListFragment containing the list of cities
+/* ListFragment containing the listview of cities */
 public class CityListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";

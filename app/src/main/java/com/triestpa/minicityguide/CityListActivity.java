@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+/* The launch activity, this determines if the app UI will run in two pane mode(for tablets),
+*  instantiates the list fragment, and handles callbacks from the listview */
 public class CityListActivity extends FragmentActivity implements CityListFragment.Callbacks {
     private final String TAG = CityListActivity.class.getSimpleName();
     private boolean mTwoPane;
