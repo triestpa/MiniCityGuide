@@ -6,8 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
 import com.triestpa.minicityguide.CityContent.City;
 import com.triestpa.minicityguide.CityContent.CityContentManager;
 
@@ -45,8 +47,13 @@ public class CityDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_city_detail, container, false);
 
+        TextView cityName = (TextView) rootView.findViewById(R.id.city_name_detail);
+        ImageView cityView = (ImageView) rootView.findViewById(R.id.city_image_detail);
+
+
         if (mCity != null) {
-            ((TextView) rootView.findViewById(R.id.city_name_detail)).setText(mCity.getDescription());
+            cityName.setText(mCity.getDescription());
+            Picasso.with(getActivity()).load(mCity.getPicURL()).into(cityView);
         }
 
         return rootView;

@@ -28,6 +28,7 @@ public class CSVParse {
             while ((csvLine = reader.readLine()) != null) {
                 //Regex expression to split the csv, ignoring commas within quotes
                 String[] row = csvLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+
                 //remove the quotation marks in each field
                 for (int i = 0; i < 4; i++) {
                     row[i] = row[i].replace("\"", "");
