@@ -26,9 +26,13 @@ public class CSVParse {
         try {
             String csvLine;
             while ((csvLine = reader.readLine()) != null) {
-                //replace the quotation marks in the string
-                csvLine = csvLine.replace("\"", "");
-                String[] row = csvLine.split(",");
+                //Regex expression to split the csv, ignoring commas within quotes
+                String[] row = csvLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
+                //remove the quotation marks in each field
+                for (int i = 0; i < 4; i++) {
+                    row[i] = row[i].replace("\"", "");
+                }
+
                 thisCity = new City(row[0], row[1], row[2], row[3]);
                 resultList.add(thisCity);
             }

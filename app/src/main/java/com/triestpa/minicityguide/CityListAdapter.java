@@ -12,6 +12,7 @@ import com.triestpa.minicityguide.CityContent.City;
 
 import java.util.List;
 
+/* ListAdapter to render the city list */
 public class CityListAdapter extends ArrayAdapter<City> {
     private Context mContext;
     private List<City> mData;
@@ -31,23 +32,25 @@ public class CityListAdapter extends ArrayAdapter<City> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Get the data item for this position
         City city = getItem(position);
+
         // Check if an existing view is being reused, otherwise inflate the view
         ViewHolder viewHolder; // view lookup cache stored in tag
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.row_city, parent, false);
-            viewHolder.name = (TextView) convertView.findViewById(R.id.city_name);
-            viewHolder.country = (TextView) convertView.findViewById(R.id.country_name);
+            viewHolder.name = (TextView) convertView.findViewById(R.id.city_name_list);
+            viewHolder.country = (TextView) convertView.findViewById(R.id.country_name_list);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+
         // Populate the data into the template view using the data object
         viewHolder.name.setText(city.getName());
         viewHolder.country.setText(city.getCountry());
+
         // Return the completed view to render on screen
         return convertView;
     }

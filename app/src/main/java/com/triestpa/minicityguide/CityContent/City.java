@@ -1,13 +1,13 @@
 package com.triestpa.minicityguide.CityContent;
 
-/**
- * Created by patrick on 3/3/15.
- */
+/* Class to store details of the city */
 public class City {
     private String name;
     private String country;
     private String picURL;
     private String description;
+
+    private int id;
 
     public City(String name, String country, String picURL, String description) {
         this.name = name;
@@ -48,5 +48,8 @@ public class City {
         this.description = description;
     }
 
+    public int getId() {return id;}
+
+    public void setId(int id) {this.id = id;}
 
 }

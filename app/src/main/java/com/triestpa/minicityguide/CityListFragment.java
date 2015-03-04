@@ -6,87 +6,55 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 
-
 import com.triestpa.minicityguide.CityContent.CSVParse;
 import com.triestpa.minicityguide.CityContent.City;
 import com.triestpa.minicityguide.CityContent.CityContentManager;
-import com.triestpa.minicityguide.CityContent.DummyContent;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 
-/**
- * A list fragment representing a list of Cities. This fragment
- * also supports tablet devices by allowing list items to be given an
- * 'activated' state upon selection. This helps indicate which item is
- * currently being viewed in a {@link CityDetailFragment}.
- * <p/>
- * Activities containing this fragment MUST implement the {@link Callbacks}
- * interface.
- */
 public class CityListFragment extends ListFragment {
 
-    /**
-     * The serialization (saved instance state) Bundle key representing the
-     * activated item position. Only used on tablets.
-     */
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
+    private Callbacks mCallbacks = inactiveCallbacks;
 
-    /**
-     * The fragment's current callback object, which is notified of list item
-     * clicks.
-     */
-    private Callbacks mCallbacks = sDummyCallbacks;
-
-    /**
-     * The current activated item position. Only used on tablets.
-     */
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
-    /**
-     * A callback interface that all activities containing this fragment must
-     * implement. This mechanism allows activities to be notified of item
-     * selections.
-     */
     public interface Callbacks {
-        /**
-         * Callback for when an item has been selected.
-         */
-        public void onItemSelected(String id);
+        public void onItemSelected(int id);
     }
 
-    /**
-     * A dummy implementation of the {@link Callbacks} interface that does
-     * nothing. Used only when this fragment is not attached to an activity.
-     */
-    private static Callbacks sDummyCallbacks = new Callbacks() {
+    private static Callbacks inactiveCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(String id) {
-        }
+        public void onItemSelected(int id) {
+        //Do nothing
+       }
     };
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
     public CityListFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        InputStream inputStream = getResources().openRawResource(R.raw.citydata);
-        CSVParse csvFile = new CSVParse(inputStream);
-        ArrayList<City> cityList = csvFile.readCities();
-        CityContentManager.setCities(cityList);
 
-        CityListAdapter adapter = new CityListAdapter(getActivity(), R.layout.row_city, CityContentManager.getCities());
-        setListAdapter(adapter);
+        //Read city list from csv file if it has not yet been read
+        if (CityContentManager.getCities() == null || CityContentManager.getCities().isEmpty()) {
+            InputStream inputStream = getResources().openRawResource(R.raw.citydata);
+            CSVParse csvFile = new CSVParse(inputStream);
+            ArrayList<City> cityList = csvFile.readCities();
+            CityContentManager.setCities(cityList);
+        }
+
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //Populate the list with cities
+        CityListAdapter adapter = new CityListAdapter(getActivity(), R.layout.row_city, CityContentManager.getCities());
+        setListAdapter(adapter);
 
         // Restore the previously serialized activated item position.
         if (savedInstanceState != null
@@ -110,18 +78,14 @@ public class CityListFragment extends ListFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
-        // Reset the active callbacks interface to the dummy implementation.
-        mCallbacks = sDummyCallbacks;
+        mCallbacks = inactiveCallbacks;
     }
 
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
-
-        // Notify the active callbacks interface (the activity, if the
-        // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        City thisCity = CityContentManager.getCities().get(position);
+        mCallbacks.onItemSelected(thisCity.getId());
     }
 
     @Override
