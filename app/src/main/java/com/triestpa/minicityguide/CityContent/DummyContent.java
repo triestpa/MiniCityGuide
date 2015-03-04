@@ -1,4 +1,4 @@
-package com.triestpa.minicityguide.CityBrowse;
+package com.triestpa.minicityguide.CityContent;
 
 import java.util.ArrayList;
 import java.util.HashMap;

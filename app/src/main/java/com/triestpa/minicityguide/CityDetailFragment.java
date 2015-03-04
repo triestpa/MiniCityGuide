@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.triestpa.minicityguide.CityBrowse.DummyContent;
+import com.triestpa.minicityguide.CityContent.DummyContent;
 
 /**
  * A fragment representing a single City detail screen.

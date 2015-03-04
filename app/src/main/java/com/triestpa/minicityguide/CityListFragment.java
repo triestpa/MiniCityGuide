@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
-import com.triestpa.minicityguide.CityBrowse.DummyContent;
+import com.triestpa.minicityguide.CityContent.DummyContent;
 
 /**
  * A list fragment representing a list of Cities. This fragment
