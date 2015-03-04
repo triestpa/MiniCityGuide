@@ -38,7 +38,7 @@ public class CityListAdapter extends ArrayAdapter<City> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.city_row, parent, false);
+            convertView = inflater.inflate(R.layout.row_city, parent, false);
             viewHolder.name = (TextView) convertView.findViewById(R.id.city_name);
             viewHolder.country = (TextView) convertView.findViewById(R.id.country_name);
             convertView.setTag(viewHolder);

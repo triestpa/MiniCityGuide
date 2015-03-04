@@ -2,9 +2,6 @@ package com.triestpa.minicityguide.CityContent;
 
 import java.util.ArrayList;
 
-/**
- * Created by patrick on 3/3/15.
- */
 public class CityContentManager {
 
     private static ArrayList<City> citiesInstance;
@@ -28,5 +25,14 @@ public class CityContentManager {
             citiesInstance = new ArrayList<City>();
         }
         citiesInstance.add(city);
+    }
+
+    public static City getCity(String name) {
+        for (int i = 0; i < citiesInstance.size(); i++) {
+            if (citiesInstance.get(i).getName().contentEquals(name)) {
+                return citiesInstance.get(i);
+            }
+        }
+        return null;
     }
 }

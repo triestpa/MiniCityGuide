@@ -4,11 +4,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 
+import com.triestpa.minicityguide.CityContent.CSVParse;
+import com.triestpa.minicityguide.CityContent.City;
+import com.triestpa.minicityguide.CityContent.CityContentManager;
 import com.triestpa.minicityguide.CityContent.DummyContent;
+
+import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * A list fragment representing a list of Cities. This fragment
@@ -70,13 +75,13 @@ public class CityListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        InputStream inputStream = getResources().openRawResource(R.raw.citydata);
+        CSVParse csvFile = new CSVParse(inputStream);
+        ArrayList<City> cityList = csvFile.readCities();
+        CityContentManager.setCities(cityList);
 
-        // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+        CityListAdapter adapter = new CityListAdapter(getActivity(), R.layout.row_city, CityContentManager.getCities());
+        setListAdapter(adapter);
     }
 
     @Override
