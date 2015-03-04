@@ -19,6 +19,10 @@ public class CityContentManager {
         return citiesInstance;
     }
 
+    public static void setCities(ArrayList<City> cities) {
+        citiesInstance = cities;
+    }
+
     public static void addCity(City city) {
         if (citiesInstance == null) {
             citiesInstance = new ArrayList<City>();
