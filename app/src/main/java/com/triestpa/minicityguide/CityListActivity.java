@@ -4,6 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.triestpa.minicityguide.CityContent.CSVParse;
+import com.triestpa.minicityguide.CityContent.City;
+import com.triestpa.minicityguide.CityContent.CityContentManager;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+
 
 /**
  * An activity representing a list of Cities. This activity
@@ -23,6 +30,7 @@ import android.support.v4.app.FragmentActivity;
  */
 public class CityListActivity extends FragmentActivity
         implements CityListFragment.Callbacks {
+    private final String TAG = CityListActivity.class.getSimpleName();
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -34,6 +42,11 @@ public class CityListActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_list);
+
+        InputStream inputStream = getResources().openRawResource(R.raw.citydata);
+        CSVParse csvFile = new CSVParse(inputStream);
+        ArrayList<City> cityList = csvFile.readCities();
+        CityContentManager.setCities(cityList);
 
         if (findViewById(R.id.city_detail_container) != null) {
             // The detail container view will be present only in the
@@ -48,8 +61,6 @@ public class CityListActivity extends FragmentActivity
                     .findFragmentById(R.id.city_list))
                     .setActivateOnItemClick(true);
         }
-
-        // TODO: If exposing deep links into your app, handle intents here.
     }
 
     /**
