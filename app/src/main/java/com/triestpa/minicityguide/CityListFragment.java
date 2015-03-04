@@ -13,6 +13,7 @@ import com.triestpa.minicityguide.CityContent.CityContentManager;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+//ListFragment containing the list of cities
 public class CityListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
@@ -45,12 +46,16 @@ public class CityListFragment extends ListFragment {
             ArrayList<City> cityList = csvFile.readCities();
             CityContentManager.setCities(cityList);
         }
-
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        view.setBackgroundColor(getResources().getColor(R.color.grey_1000));
+
+        ArrayList<City> beans =
+                new ArrayList<City>(CityContentManager.getCities());
 
         //Populate the list with cities
         CityListAdapter adapter = new CityListAdapter(getActivity(), R.layout.row_city, CityContentManager.getCities());

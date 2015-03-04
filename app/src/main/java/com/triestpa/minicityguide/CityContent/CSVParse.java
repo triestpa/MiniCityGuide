@@ -8,9 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-/**
- * Created by patrick on 3/3/15.
- */
+/* Util class to parse the city data csv file */
 public class CSVParse {
     private final String TAG = CSVParse.class.getSimpleName();
     InputStream inputStream;
@@ -27,6 +25,7 @@ public class CSVParse {
             String csvLine;
             while ((csvLine = reader.readLine()) != null) {
                 //Regex expression to split the csv, ignoring commas within quotes
+                //From http://stackoverflow.com/a/1757107
                 String[] row = csvLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
 
                 //remove the quotation marks in each field

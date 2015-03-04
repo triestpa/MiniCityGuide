@@ -1,16 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/grey_1000">
 
-    <TextView
-        android:id="@+id/city_name_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/city_image_list"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_1000"/>
 
-    <TextView
-        android:id="@+id/country_name_list"
-        android:layout_below="@+id/city_name_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@drawable/image_gradient"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/city_name_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/grey_0"
+            android:textSize="25sp"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp"
+            android:fontFamily="sans-serif-light"/>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="50dp"
+            android:background="@color/blue_500"
+            android:id="@+id/blue_line"
+            android:layout_alignRight="@+id/city_name_list"
+            android:layout_alignParentBottom="true"
+         />
+
+        <TextView
+            android:id="@+id/country_name_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey_0"
+            android:textSize="25sp"
+            android:layout_alignLeft="@+id/blue_line"
+            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp"
+            android:fontFamily="sans-serif-light"/>
+    </RelativeLayout>
 
 </RelativeLayout>

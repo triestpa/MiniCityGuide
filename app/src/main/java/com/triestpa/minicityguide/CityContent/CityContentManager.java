@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-
 // Singleton class to serve city data to the rest of the app. NOT INTENDED TO BE THREADSAFE.
 public class CityContentManager {
 
